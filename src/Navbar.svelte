@@ -14,7 +14,9 @@
   } from 'sveltestrap';
 
   let isOpen = false;
-
+  let items = {
+    
+  }
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
   }
@@ -31,15 +33,6 @@
       <NavItem>
         <NavLink href="https://github.com/bestguy/sveltestrap">GitHub</NavLink>
       </NavItem>
-      <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>Options</DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem>Option 1</DropdownItem>
-          <DropdownItem>Option 2</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Reset</DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
     </Nav>
   </Collapse>
 </Navbar>
