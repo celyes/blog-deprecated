@@ -1,11 +1,10 @@
 <script>
 	import Navbar from './Navbar.svelte';
-	let name = "ilyes";
 </script>
 
 <main>
 	<Navbar></Navbar>
-	<h1>Hello {name}!</h1>	
+	<h1>This is my blog!</h1>	
 </main>
 
 <style>
