@@ -14,9 +14,6 @@
   } from 'sveltestrap';
 
   let isOpen = false;
-  let items = {
-    
-  }
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
   }
@@ -28,10 +25,10 @@
   <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
     <Nav class="ml-auto" navbar>
       <NavItem>
-        <NavLink href="#components/">Components</NavLink>
+        <NavLink href="#">Components</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="https://github.com/bestguy/sveltestrap">GitHub</NavLink>
+        <NavLink href="https://github.com/celyes/">GitHub</NavLink>
       </NavItem>
     </Nav>
   </Collapse>

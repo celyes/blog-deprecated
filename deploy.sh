@@ -9,4 +9,4 @@ npm run build
 git add .
 git commit -m 'deploy content'
 
-git push -f git@github.com:celyes/blog.git master
+git push -f origin master
