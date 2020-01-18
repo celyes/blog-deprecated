@@ -6,11 +6,7 @@
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavLink
   } from 'sveltestrap';
 
   let isOpen = false;
@@ -20,16 +16,24 @@
 </script>
 
 <Navbar color="light" light expand="md">
+  <div class="container">
   <NavbarBrand href="/">Ilyes</NavbarBrand>
   <NavbarToggler on:click={() => (isOpen = !isOpen)} />
   <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
     <Nav class="ml-auto" navbar>
-      <NavItem>
-        <NavLink href="#">Components</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink href="https://github.com/celyes/">GitHub</NavLink>
-      </NavItem>
+        <NavItem>
+          <NavLink href="#">PHP</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#">JS</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#">Web Design</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#">Contact</NavLink>
+        </NavItem>
     </Nav>
   </Collapse>
+  </div>
 </Navbar>
