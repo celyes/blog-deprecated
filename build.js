@@ -1,31 +1,39 @@
 const fs = require('fs');
 const path = require('path');
-const markdown = require( "markdown" ).markdown;
 
-let mddir = path.join(__dirname, 'docs');
-let htmldir = path.join(__dirname, 'public');
+const converter = require('./scripts/convert');
 
-fs.readdir(mddir, (err, files)=>{
+let mdpath = path.join(__dirname, 'docs');
+let htmlpath = path.join(__dirname, 'public');
+let scriptpath = path.join(__dirname, 'components');
 
-    if (err) throw err;
 
+let assets = {}
+fs.readdir(scriptpath, (err, files) => {
     files.forEach(file => {
-        
-        fileDir = path.join(mddir, file);
-
-        file = file.slice(0, -3);
-
-        fs.readFile(fileDir, (err, data) => {
+        let filename = file.slice(0, -5);
+        let filepath = fs.readFileSync(path.resolve(scriptpath, file), 'utf8')
+        if(filename == "header"){
             
-            if (err) throw err;
-            data = markdown.toHTML(data.toString());
-            fs.writeFile(path.join(htmldir, file) + ".html", data, err => { 
-                if (err) throw err;
-                console.log(`file: ${file}.html - status: OK`);
-            });
+            assets = {
+                ...assets,
+                ...{"header": filepath}
+            }
+        }else if(filename == "footer"){
+            assets = {
+                ...assets,
+                ...{"footer": filepath}
+            }
+        }
+    });
+});
 
-        })
+fs.readdir(mdpath, (err, files)=>{
 
-    })
+    if (!fs.existsSync('./public')){
+        fs.mkdirSync('./public');
+    }
+    if (err) throw err;
+    converter.build(files, mdpath, htmlpath, assets);
 
 })
