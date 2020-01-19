@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const markdown = require( "markdown" ).markdown;
 
-
 exports.build = function(files, mdpath, htmlpath, assets){
     
     files.forEach(file => {

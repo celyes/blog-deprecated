@@ -1,13 +1,24 @@
-const extractLayout = dir => {
-    fs.readdir(dir, (err, files) => {
+const fs = require('fs');
+const path = require('path');
 
-        if(err) throw err;
-        console.log(files);
-        files.forEach(file =>{
-            fs.readFile(path.join(scriptpath, file), (err, data)=> {
-                if(err) throw err;
-                if(file == 'footer.txt');
-            });
-        })
-    })
+const scriptpath = path.join(__dirname+'/../', 'components');
+
+exports.extract = files => {
+    let assets = {}
+    files.forEach(file => {      
+        let filecontent = fs.readFileSync(path.resolve(scriptpath, file), 'utf8');
+        
+        if(file == "header.html"){
+            assets = {
+                ...assets,
+                ...{"header": filecontent}
+            }
+        }else if(file == "footer.html"){
+            assets = {
+                ...assets,
+                ...{"footer": filecontent}
+            }
+        }
+    });
+    return assets;
 }
