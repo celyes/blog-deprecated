@@ -7,33 +7,33 @@ let mdpath = path.join(__dirname, 'docs');
 let htmlpath = path.join(__dirname, 'public');
 let scriptpath = path.join(__dirname, 'components');
 
-
-let assets = {}
 fs.readdir(scriptpath, (err, files) => {
+    
+    let assets = {}
+
     files.forEach(file => {
-        let filename = file.slice(0, -5);
-        let filepath = fs.readFileSync(path.resolve(scriptpath, file), 'utf8')
-        if(filename == "header"){
-            
+        
+        let filecontent = fs.readFileSync(path.resolve(scriptpath, file), 'utf8');
+        
+        if(file == "header.html"){
             assets = {
                 ...assets,
-                ...{"header": filepath}
+                ...{"header": filecontent}
             }
-        }else if(filename == "footer"){
+        }else if(file == "footer.html"){
             assets = {
                 ...assets,
-                ...{"footer": filepath}
+                ...{"footer": filecontent}
             }
         }
+    
+    });
+    fs.readdir(mdpath, (err, files)=>{
+
+        if (!fs.existsSync('./public')){
+            fs.mkdirSync('./public');
+        }
+        if (err) throw err;
+        converter.build(files, mdpath, htmlpath, assets);
     });
 });
-
-fs.readdir(mdpath, (err, files)=>{
-
-    if (!fs.existsSync('./public')){
-        fs.mkdirSync('./public');
-    }
-    if (err) throw err;
-    converter.build(files, mdpath, htmlpath, assets);
-
-})
